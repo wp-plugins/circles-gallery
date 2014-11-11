@@ -255,7 +255,7 @@ class CirclesGallery {
 			$meta_link_target = "";
 
 			if(! empty($link)) {
-				$click_action = "page";
+				$dataHref = "";
 				$meta_link_target = get_post_meta($attachment->ID, '_cg_image_link_target', true);
 			} else {
 				if($click_action == "attachment_page")
@@ -264,9 +264,9 @@ class CirclesGallery {
 					$link = wp_get_attachment_url($attachment->ID);
 				else 
 					$link = $tt . "?h=600&amp;w=800&amp;src=".  $url;
+					
+				$dataHref = $click_action == 'none' ? "data-" : "";
 			}
-			$dataHref = $click_action == 'none' ? "data-" : "";
-
 
 			$html .= "	<div class='cg-item cg-text-$text_position'>\n";
 			$html .= "		<div class='ih-item circle $effectClasses'>\n";
