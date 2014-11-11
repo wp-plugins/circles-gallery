@@ -238,24 +238,7 @@ class CirclesGallery {
 
 		$rel = "";
 		$lightbox = "";
-		if($click_action == "prettyphoto") 
-		{
-			$rel = "prettyphoto";
-			$lightbox = $rel;			
-			wp_register_script("prettyphoto", plugins_url('assets/prettyphoto/jquery.prettyPhoto.js', __FILE__), 'jquery', '1.3.19', true);
-			wp_enqueue_script("prettyphoto");
-			wp_register_style('prettyphoto-style', plugins_url('assets/prettyphoto/css/prettyPhoto.css', __FILE__), false);
-			wp_enqueue_style('prettyphoto-style');
-		}
-		if($click_action == "colorbox") 
-		{
-			$rel = "colorbox";
-			$lightbox = $rel;
-			wp_register_script("colorbox", plugins_url('assets/colorbox/jquery.colorbox-min.js', __FILE__), 'jquery', '1.3.19', true);
-			wp_enqueue_script("colorbox");
-			wp_register_style('colorbox-style', plugins_url('assets/colorbox/'.$colorbox_theme.'/colorbox.css', __FILE__), false);
-			wp_enqueue_style('colorbox-style');
-		}
+
 		if($click_action == "lightbox") 
 		{
 			$rel = "lightbox";
@@ -265,34 +248,6 @@ class CirclesGallery {
 			wp_register_style('lightbox-style', plugins_url('assets/lightbox/css/lightbox.css', __FILE__), false);
 			wp_enqueue_style('lightbox-style');
 		}
-		if($click_action == "swipebox") 
-		{
-			$rel = "swipebox";
-			$lightbox = $rel;
-			wp_register_script("swipebox", plugins_url('assets/swipebox/jquery.swipebox.min.js', __FILE__), 'jquery', '1.3.19', true);
-			wp_enqueue_script("swipebox");
-			wp_register_style('swipebox-style', plugins_url('assets/swipebox/css/swipebox.min.css', __FILE__), false);
-			wp_enqueue_style('swipebox-style');
-		}
-		if($click_action == "fancybox") 
-		{
-			$rel = "fancybox";
-			$lightbox = $rel;
-			wp_register_script("fancybox", plugins_url('assets/fancybox/script.js', __FILE__), 'jquery', '1.3.19', true);
-			wp_enqueue_script("fancybox");
-			wp_register_style('fancybox-style', plugins_url('assets/fancybox/style.css', __FILE__), false);
-			wp_enqueue_style('fancybox-style');
-		}
-		if($click_action == "magnific") 
-		{
-			$rel = "magnific";
-			$lightbox = $rel;
-			wp_register_script("magnific", plugins_url('assets/magnific/script.js', __FILE__), 'jquery', '1.3.19', true);
-			wp_enqueue_script("magnific");
-			wp_register_style('magnific-style', plugins_url('assets/magnific/style.css', __FILE__), false);
-			wp_enqueue_style('magnific-style');
-		}
-
 		foreach ($attachments as $attachment)
 		{
 			$url = wp_get_attachment_url($attachment->ID);
@@ -300,6 +255,7 @@ class CirclesGallery {
 			$meta_link_target = "";
 
 			if(! empty($link)) {
+				$click_action = "page";
 				$meta_link_target = get_post_meta($attachment->ID, '_cg_image_link_target', true);
 			} else {
 				if($click_action == "attachment_page")
