@@ -70,6 +70,10 @@ The simplest way to install is to click on 'Plugins' then 'Add' and type 'Circle
 
 The MONO and MULTI licenses bundle 6 different lightboxes. However you can use any other lightbox you want also with the Free license. If you have installed a lightbox plugin then you just need to select "Direct link to image" in the "Lightbox" settings.
 
+= What image size should I use? =
+
+The size of the images is not important because the final image will be resized to the size of the circle. So you should just be sure to choose a size that is at least big as the size of the circle.
+
 = How can I get support? =
 
 * 1 year of support is included only with a MONO or MULTI license: http://circles-gallery.com/wordpress/purchase.html

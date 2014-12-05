@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Circles Gallery Free
- * Version:           1.0.3
+ * Version:           1.0.4
  * Description: 	  Creates galleries made of circles and bubbles and love.
  * Author:            GreenTreeLabs
  * Author URI:        http://greentreelabs.net
