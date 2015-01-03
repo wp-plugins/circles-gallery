@@ -96,7 +96,13 @@ The size of the images is not important because the final image will be resized 
 
 == Changelog ==
 
-= 1.0.3. =
+= 1.0.5 =
+* Images are now retrieved via relative url
+
+= 1.0.4 =
+* Tested against 4.0.1
+
+= 1.0.3 =
 * Removed php notice
 
 = 1.0 =

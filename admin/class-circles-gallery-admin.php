@@ -105,7 +105,8 @@ class CirclesGallery_Admin
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
-
+		add_filter( 'plugin_row_meta',array( $this, 'register_links' ), 10, 2);
+		
 		// Add the options page and menu item.
 		global $current_user;
 		if(current_user_can('manage_options'))
@@ -127,7 +128,21 @@ class CirclesGallery_Admin
 
 		add_action( 'admin_bar_menu', array($this, 'gallery_admin_bar'), 100);
 	}
+	
+	public function register_links($links, $file)
+	{
+		$base = plugin_basename(CIRCLES_GALLERY_FILE);
+        if ($file == $base) {
+            $links[] = '<a href="options-general.php?page=circles-gallery" title="Circles Gallery Settings">Settings</a>';
+            $links[] = '<a href="http://circles-gallery.com/wordpress/purchase.html" title="Buy a PRO license">Buy a PRO license</a>';
+            $links[] = '<a href="https://twitter.com/greentreelabs" title="@GreenTreeLabs on Twitter">Twitter</a>';
+            $links[] = '<a href="https://www.facebook.com/greentreelabs" title="GreenTreeLabs on Facebook">Facebook</a>';
+            $links[] = '<a href="https://www.google.com/+GreentreelabsNetjs" title="GreenTreeLabs on Google+">Google+</a>';
+        }
+        return $links;
+	}
 
+	
 	public function gallery_admin_bar()
 		{
             global $wp_admin_bar;

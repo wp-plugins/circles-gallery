@@ -238,6 +238,7 @@ class CirclesGallery {
 
 		$rel = "";
 		$lightbox = "";
+		$siteurl = get_site_url();
 
 		if($click_action == "lightbox") 
 		{
@@ -277,7 +278,7 @@ class CirclesGallery {
 			
 
 			$html .= "				<div class='img'>\n";
-			$html .= "					<img src='" . $tt . "?h=$circle_width&amp;w=$circle_width&amp;src=".  $url ."' />\n";
+			$html .= "					<img src='" . $tt . "?h=$circle_width&amp;w=$circle_width&amp;src=". str_replace($siteurl, '', $url) ."' />\n";
 			$html .= "				</div>\n";
 			if($effectNo == "8")
 				$html .= "		</div>\n";
