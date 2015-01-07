@@ -9,19 +9,15 @@
  * @copyright 2014 GreenTreeLabs
  */
 
+require_once( 'includes/BFI_Thumb.php' );
+
 /**
- * Plugin class. This class should ideally be used to work with the
- * public-facing side of the WordPress site.
- *
- *
  * @package CirclesGallery
  * @author    GreenTreeLabs <diego@greentreelabs.net>
  */
 class CirclesGallery {
 
 	/**
-	 * Plugin version, used for cache-busting of style and script file references.
-	 *
 	 * @since   1.0.0
 	 *
 	 * @var     string
@@ -29,13 +25,6 @@ class CirclesGallery {
 	const VERSION = '1.0.0';
 
 	/**
-	 * Unique identifier for your plugin.
-	 *
-	 *
-	 * The variable name is used as the text domain when internationalizing strings
-	 * of text. Its value should match the Text Domain file header in the main
-	 * plugin file.
-	 *
 	 * @since    1.0.0
 	 *
 	 * @var      string
@@ -43,8 +32,6 @@ class CirclesGallery {
 	protected $plugin_slug = 'circles-gallery';
 
 	/**
-	 * Instance of this class.
-	 *
 	 * @since    1.0.0
 	 *
 	 * @var      object
@@ -53,9 +40,6 @@ class CirclesGallery {
 
 	protected $settings = null;
 	/**
-	 * Initialize the plugin by setting localization and loading public scripts
-	 * and styles.
-	 *
 	 * @since     1.0.0
 	 */
 	private function __construct() 
@@ -238,7 +222,8 @@ class CirclesGallery {
 
 		$rel = "";
 		$lightbox = "";
-		$siteurl = get_site_url();
+		$params = array( 'width' => $circle_width, 'height' => $circle_width, 'crop' => true );
+		$bigParams = array( 'width' => 800 );
 
 		if($click_action == "lightbox") 
 		{
@@ -264,7 +249,7 @@ class CirclesGallery {
 				else if($click_action == "image")
 					$link = wp_get_attachment_url($attachment->ID);
 				else 
-					$link = $tt . "?h=600&amp;w=800&amp;src=".  $url;
+					$link = bfi_thumb($url, $bigParams);
 					
 				$dataHref = $click_action == 'none' ? "data-" : "";
 			}
@@ -278,7 +263,7 @@ class CirclesGallery {
 			
 
 			$html .= "				<div class='img'>\n";
-			$html .= "					<img src='" . $tt . "?h=$circle_width&amp;w=$circle_width&amp;src=". str_replace($siteurl, '', $url) ."' />\n";
+			$html .= "					<img src='" . bfi_thumb($url, $params ) . "'/>";
 			$html .= "				</div>\n";
 			if($effectNo == "8")
 				$html .= "		</div>\n";
