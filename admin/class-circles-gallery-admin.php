@@ -346,7 +346,6 @@ class CirclesGallery_Admin
 			)
 		);
 
-		$this->init_check_permissions();
 		register_setting(CIRCLES_GALLERY_OPT_NAME, CIRCLES_GALLERY_OPT_NAME);
 
 		add_settings_section(
@@ -488,111 +487,6 @@ class CirclesGallery_Admin
 			update_post_meta($post['ID'], '_cg_image_link_target', $attachment['cg_image_link_target']);
 		}		
 		return $post;
-	}
-
-	// checks if cache folder is writable for real
-	function cache_writable()
-	{
-		$file = CIRCLES_GALLERY_DIR . "/cache/".time().'.txt';
-		$stream = @fopen($file, 'w');
-		if($stream)
-		{
-			fclose($stream);
-			unlink($file);
-			return true;
-		}
-		else
-		{
-			return false;
-		}	
-	}
-
-	function init_check_permissions()
-	{
-		if(!$this->settings['cache_writable'])
-		{
-			$this->install_check_permissions();
-			$this->settings['cache_writable'] = true;
-			update_option(CIRCLES_GALLERY_OPT_NAME, $this->settings);
-			flush_rewrite_rules();
-		}
-	}
-
-	// checks permissions on the cache folder and the plugin folder
-	function install_check_permissions()
-	{
-		$fixed = false;
-		if(!$this->cache_writable())
-		{
-			$dir = plugin_dir_path( __FILE__ );
-			$plugin_chmod = chmod($dir, 0755);
-			$cg_timthumb_chmod = chmod(CIRCLES_GALLERY_DIR . "/timthumb.php", 0755);
-			$cache_chmod = chmod(CIRCLES_GALLERY_DIR . "/cache", 0755);
-			$index_chmod = chmod(CIRCLES_GALLERY_DIR . "/cache/index.html", 0755);
-			$touch_chmod = chmod(CIRCLES_GALLERY_DIR . "/cache/cg_timthumb_cacheLastCleanTime.touch", 0755);
-			if($plugin_chmod && $cache_chmod && $index_chmod && $touch_chmod && $cg_timthumb_chmod)
-			{
-				$fixed = true;
-			};
-		}
-
-		if(!$this->cache_writable())
-		{
-			if($fixed)
-			{
-				function cg_timthumb_big_problem()
-				{
-					echo "<div class='error fade'><p>".__('The thumbnails cache folder is not writable! <a href="options-general.php?page=circles-gallery">Click here to go to the settings where you can fix this.</a> Unless you do so your images might not appear and the plugin could only generate whitespace!', 'td')." ".__('The plugin was trying to fix it but the 0755 permission was not enough.', 'td')."</p></div>";
-				}
-				add_action('admin_notices', 'cg_timthumb_big_problem');
-			}
-			else
-			{
-				function cg_timthumb_problem()
-				{
-					echo "<div class='error fade'><p> ".__('The thumbnails cache folder is not writable! <a href="options-general.php?page=circles-gallery">Click here to go to the settings where you can fix this.</a> Unless you do so your images might not appear and the plugin could only generate whitespace!', 'td')."</p></div>";
-				}
-				add_action('admin_notices', 'cg_timthumb_problem');
-			}
-		}
-		else
-		{
-			if($fixed)
-			{
-				function cg_timthumb_fixed()
-				{
-					echo "<div class='updated fade'><p> ".__('The thumbnails cache folder was not writable! This was automatically fixed for you.', 'td')."</p></div>";
-				}
-				add_action('admin_notices', 'cg_timthumb_fixed');
-			}
-			else
-			{
-				function cg_timthumb_perfect()
-				{
-					echo "<div class='updated fade'><p> ".__('The thumbnails cache folder was tested and it is writable!', 'td')."</p></div>";
-				}
-				add_action('admin_notices', 'cg_timthumb_perfect');
-			}
-		}
-	}
-
-	// checks folder permissions on demand, returns nice output
-	function on_demand_check_permissions()
-	{
-		check_ajax_referer('on_demand_check_permissions', 'security');
-		$output = array();
-		if($this->cache_writable())
-		{
-			$output['writable'] = '<span style="font-weight:bold; color:green;">writable</span>';
-		}
-		else
-		{
-			$output['writable'] = '<span style="font-weight:bold; color:red;">not writable</span>';
-		}
-		$output['permission_plugin'] = substr(sprintf('%o', fileperms(dirname(__FILE__))), -4);
-		$output['permission_cache'] = substr(sprintf('%o', fileperms(dirname(__FILE__)."/cache")), -4);
-		echo json_encode($output);
-		die();
 	}
 
 	/**

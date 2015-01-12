@@ -96,6 +96,9 @@ The size of the images is not important because the final image will be resized 
 
 == Changelog ==
 
+= 1.0.7 =
+* removed old permission checks
+
 = 1.0.6 =
 * BFI_Thumb is now used to make thumbnails
 
