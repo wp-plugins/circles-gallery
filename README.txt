@@ -3,7 +3,7 @@ Contributors: GreenTreeLabs
 Donate link: http://greentreelabs.net/blog/donate/
 Tags: gallery, grid, grids, grid gallery, best gallery plugin, photo album, best gallery, photo albums, album, widget, fancy gallery, plugin for gallery, photo gallery, html5 player, plugin gallery, wp gallery, wordpress gallery plugin, responsive gallery, gallery plugin, pagination gallery, pagination portfolio, wp gallery plugin, photo slider, image slider, responsive gallery, wordpress portfolio plugin, plugin, post, links, page, admin, posts, images, seo image, twitter, image album, image, google, portfolio, best portfolio plugin, easy gallery plugin, easy portfolio plugin 
 Requires at least: 3.5.0
-Tested up to: 4.1.1
+Tested up to: 4.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -95,6 +95,9 @@ The size of the images is not important because the final image will be resized 
 4. Text columns with fixed height
 
 == Changelog ==
+
+= 1.0.8 =
+* WordPress 4.2 compatibility
 
 = 1.0.7 =
 * removed old permission checks
