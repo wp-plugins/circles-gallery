@@ -256,7 +256,7 @@ class CirclesGallery {
 
 			$html .= "	<div class='cg-item cg-text-$text_position'>\n";
 			$html .= "		<div class='ih-item circle $effectClasses'>\n";
-			$html .= "			<a data-title=".htmlspecialchars($attachment->post_title)." ".$dataHref."href='$link' target='$meta_link_target' rel='$rel'>\n";
+			$html .= "			<a data-lightbox='gallery' data-title=".htmlspecialchars($attachment->post_title)." ".$dataHref."href='$link' target='$meta_link_target' rel='$rel'>\n";
 
 			if($effectNo == "8")
 				$html .= "		<div class='img-container'>\n";

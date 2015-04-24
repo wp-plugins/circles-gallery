@@ -96,6 +96,9 @@ The size of the images is not important because the final image will be resized 
 
 == Changelog ==
 
+= 1.0.9 =
+* Added lightbox groups
+
 = 1.0.8 =
 * WordPress 4.2 compatibility
 
